@@ -126,13 +126,13 @@ BEGIN
 			NULL;
 	END CASE;
  END PROCESS;
- -- endpoints psl per valutare gli stati di interesse per la valutazione delle asserzioni
+ -- psl endpoints to evaluate states useful for assertions
  --psl endpoint E_FFLS_FBMS is {STATE_NOW_FRONT = FFLS; STATE_NOW_FRONT = FBMS}@CLK'active;
  --psl endpoint E_FRLS_RBMS is {STATE_NOW_REAR = FRLS; STATE_NOW_REAR = RBMS}@CLK'active;
  --psl endpoint E_ERRS_R is {STATE_NOW_REAR = ERRS}@CLK'active;
  --psl endpoint E_ERRS_F is {STATE_NOW_FRONT = ERRS}@CLK'active;
 
- -- Derminazione dello stato di full lock, blocco completo di tutte le ruote
+ -- Determining the full lock state
  PROCESS(STATE_NOW_REAR,STATE_NOW_FRONT)
  BEGIN
 	IF (STATE_NOW_REAR=FRLS AND STATE_NOW_FRONT=FFLS) THEN
@@ -140,7 +140,7 @@ BEGIN
 	ELSE FULL_LOCK <= '0';
 	END IF;
  END PROCESS;
- -- Processo di output 
+ -- Output process 
  PROCESS(STATE_NOW_REAR,STATE_NOW_FRONT)
   BEGIN
   	
